@@ -11,7 +11,7 @@ class get_urls:
         self.escape_extension = ["png", "xml", "jpg", "jpeg", "css", "io", "ico"]
         self.pool = Pool(processes=5)
 
-    def group_by_owners(self, url, new_urls):
+    def scraper(self, url, new_urls):
         try:
             json_data = ""
             try:
@@ -79,7 +79,7 @@ class get_urls:
                                 ele["is_visited"] = True
                                 r.append(Process(target=self.group_by_owners, args=(ele["url"], new_urls,)))
                                 #pool.apply_async(self.group_by_owners, [ele["url"], new_urls])
-                                #self.group_by_owners(ele["url"])
+                                #self.scraper(ele["url"])
             for i in r:
                 i.start()
             for i in r:
@@ -102,7 +102,7 @@ def main():
     with test_manager:
         global new_urls
         new_urls = [{"url": "https://medium.com/", "is_visited": False}]
-        cr.group_by_owners("https://medium.com/", new_urls)
+        cr.scraper("https://medium.com/", new_urls)
         pool.close()
         pool.join()
 
