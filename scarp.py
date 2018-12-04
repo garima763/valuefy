@@ -41,7 +41,7 @@ class get_urls:
             SentryLogger.log()
         self.access_next_url(new_urls)
         f = open("D:/urls", 'a+')
-        f.write(new_urls)
+        f.write(new_urls["url"])
 
 
     def get_url(self, page):
